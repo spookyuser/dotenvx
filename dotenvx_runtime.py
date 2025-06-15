@@ -60,6 +60,8 @@ def load(path: str = ".env", *, override: bool = False, keys_path: Optional[str]
                 val = _decrypt(val, private_key)
             except Exception:
                 pass
+        if val.startswith(_PREFIX):
+            continue
         if key in os.environ and not override:
             loaded[key] = os.environ[key]
             continue
